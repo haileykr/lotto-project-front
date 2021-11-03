@@ -34,12 +34,18 @@ const LottoRandomHeader = () => {
       return parseInt(dff / (24 * 3600 * 1000 * 7)) + 1;
     };
     let week = getWeek();
-
     setLatestWeek(week);
 
-    axios.get("http://localhost:5000/latest").then((res) => {
-      console.log(res);
-      const data = res.data;
+    const getNum = async () => {
+      let latestNums = await axios.get("https://lott-of-fun.herokuapp.com/latest");
+
+      if (latestNums.round !== week) {
+        await axios.get("https://lott-of-fun.herokuapp.com/lottos/update");
+
+        latestNums = await axios.get("https://lott-of-fun.herokuapp.com/latest");
+      }
+
+      const data = latestNums.data;
       console.log(data);
       if (data) {
         const nums = [];
@@ -53,7 +59,8 @@ const LottoRandomHeader = () => {
         setLottoNumber(nums);
         setDrwNo(data.numberBon);
       }
-    });
+    };
+    getNum();
   }, []);
 
   return (

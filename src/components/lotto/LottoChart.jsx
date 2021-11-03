@@ -54,9 +54,8 @@ const LottoChart = () => {
       from: fromDate,
       to: toDate,
     };
-    console.log(range);
     const records = await axios.post(
-      "http://localhost:5000/number-counts",
+      "https://lott-of-fun.herokuapp.com/number-counts",
       range
     );
 
