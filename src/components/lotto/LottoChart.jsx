@@ -1,22 +1,42 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import * as axios from "axios";
 import { Bar } from "react-chartjs-2";
-
 import styled from "styled-components";
 
 const LottoChartContainer = styled.div`
   margin-top: 50px;
   text-align: center;
-  width: 100%;
+  width: 90%;
   height: 100%;
-  border: 1px solid #aeaeae;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  h2 {
+    border-bottom: 1px solid #eef0f6;
+    text-align: start;
+    padding-left: 1rem;
+    margin-top: 1rem;
+  }
+`;
+
+const InputsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  font-size: 1rem;
+`;
+
+const BarChartBox = styled.div`
+  padding: 1rem;
+  height: 100%;
   display: flex;
   flex-direction: row;
 `;
 
 const LottoChart = () => {
   const today = new Date().toISOString();
-
   const [lottoAll, setLottoAll] = useState(null);
   const [fromDate, setFromDate] = useState("2002-12-07T00:00:00.000Z");
   const [toDate, setToDate] = useState(today);
@@ -83,23 +103,28 @@ const LottoChart = () => {
 
   return (
     <>
-      <input
-        type="date"
-        id="from"
-        name="from"
-        min="2002-12-07"
-        onChange={onChangeFrom}
-      />
-      <input
-        type="date"
-        id="to"
-        name="to"
-        min="2002-12-07"
-        onChange={onChangeTo}
-      />
-      <button onClick={onClickCount}>Click! </button>
       <LottoChartContainer>
-        <Bar data={data} options={options} />
+        <h2>Number Statistics </h2>
+        <InputsContainer>
+          <input
+            type="date"
+            id="from"
+            name="from"
+            min="2002-12-07"
+            onChange={onChangeFrom}
+          />
+          <input
+            type="date"
+            id="to"
+            name="to"
+            min="2002-12-07"
+            onChange={onChangeTo}
+          />
+          <button onClick={onClickCount}>Click! </button>
+        </InputsContainer>
+        <BarChartBox>
+          <Bar data={data} options={options} />
+        </BarChartBox>
       </LottoChartContainer>
     </>
   );
