@@ -20,14 +20,12 @@ const LottoChartContainer = styled.div`
     margin-top: 1rem;
   }
 `;
-
 const InputsContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1rem;
   font-size: 1rem;
 `;
-
 const BarChartBox = styled.div`
   padding: 1rem;
   height: 100%;
@@ -54,14 +52,8 @@ const LottoChart = () => {
       from: fromDate,
       to: toDate,
     };
-    const records = await axios.post(
-      "https://lott-of-fun.herokuapp.com/number-counts",
-      range
-    );
-
-    console.log(records);
+    const records = await axios.post(range);
     const sorted = records.data.sort((a, b) => b[1] - a[1]);
-    console.log(records.data);
     setLottoAll(sorted);
   }, [fromDate, toDate]);
 

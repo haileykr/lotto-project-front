@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import LottoBoxComponent from "./lotto-box/LottoBoxComponent";
+import LottoBoxSimple from "./lotto-box/LottoBoxSimple";
 import styled from "styled-components";
 
 const LottoRandomContentBox = styled.div`
@@ -49,7 +49,7 @@ const LottoRandomContent = () => {
     <LottoRandomContentBox>
       <h2>Generate Random Numbers!</h2>
       {lottoNumbers.map((lottoNumber, i) => (
-        <LottoBoxComponent key={i} lottoNumber={lottoNumber} />
+        <LottoBoxSimple key={i} lottoNumber={lottoNumber} />
       ))}
       <RandomButton onClick={handleButtonClick}>Generate!</RandomButton>
     </LottoRandomContentBox>
