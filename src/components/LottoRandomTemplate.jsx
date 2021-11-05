@@ -4,6 +4,7 @@ import LatestNumbers from "./lotto/LatestNumbers";
 import LottoRandomContent from "./lotto/LottoRandomContent";
 import styled from "styled-components";
 import LottoChart from "./lotto/LottoChart";
+import LottoStatistics from "./lotto/LottoStatistics";
 
 const LottoRandomTemplateBox = styled.div`
   margin: auto;
@@ -25,7 +26,11 @@ class LottoRandomTemplate extends Component {
         <Header />
         <LatestNumbers />
         <LottoChart />
-        <LottoRandomContent />
+
+        
+        
+        <LottoStatistics />
+     <LottoRandomContent />
       </LottoRandomTemplateBox>
     );
   }
