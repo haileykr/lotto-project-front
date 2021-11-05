@@ -38,10 +38,7 @@ const LottoStatistics = () => {
     let latestNums = await axios.get(
       "https://lott-of-fun.herokuapp.com/number-counts-stats"
     );
-
-    const data = latestNums.data;
-
-    if (data) {
+    if (latestNums) {
       const {
         sorted1Month,
         sorted3Months,
@@ -49,7 +46,7 @@ const LottoStatistics = () => {
         sorted3Years,
         sorted10Years,
         sortedAll,
-      } = data;
+      } = latestNums;
       most1Month = sorted1Month.slice(0, 6).map((i) => i[0]);
       least1Month = sorted1Month.slice(38).map((i) => i[0]);
       most3Months = sorted3Months.slice(0, 6).map((i) => i[0]);
