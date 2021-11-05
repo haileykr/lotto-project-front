@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as axios from "axios";
-import LottoBoxSimple from "./lotto-box/LottoBoxSimple";
+
+
+import LottoBoxSimpleSm from "./lotto-box/LottoBoxSimpleSm";
 import styled from "styled-components";
 
 const LatestNumbersBox = styled.div`
   margin-top: 50px;
   text-align: center;
   width: 90%;
-  height: 170px;
+  height: 500px;
   border-radius: 10px;
   background-color: white;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   h2 {
     border-bottom: 1px solid #eef0f6;
@@ -21,63 +23,94 @@ const LatestNumbersBox = styled.div`
   }
 `;
 
+const HorizontalContainer = styled.div`
+  display: flex;
+
+  flex-direction: row;
+`;
+
 const LottoStatistics = () => {
-  let most1Month;
-  let most3Months;
-  let most1Year;
-  let most3Years;
-  let most10Years;
-  let mostAll;
-  let least1Month;
-  let least3Months;
-  let least1Year;
-  let least3Years;
-  let least10Years;
-  let leastAll;
-  const getNum = async () => {
-    let latestNums = await axios.get(
-      "https://lott-of-fun.herokuapp.com/number-counts-stats"
-    );
-    if (latestNums) {
-      const {
-        sorted1Month,
-        sorted3Months,
-        sorted1Year,
-        sorted3Years,
-        sorted10Years,
-        sortedAll,
-      } = latestNums;
-      most1Month = sorted1Month.slice(0, 6).map((i) => i[0]);
-      least1Month = sorted1Month.slice(38).map((i) => i[0]);
-      most3Months = sorted3Months.slice(0, 6).map((i) => i[0]);
-      least3Months = sorted3Months.slice(38).map((i) => i[0]);
-      most1Year = sorted1Year.slice(0, 6).map((i) => i[0]);
-      least1Year = sorted1Year.slice(38).map((i) => i[0]);
-      most3Years = sorted3Years.slice(0, 6).map((i) => i[0]);
-      least3Years = sorted3Years.slice(38).map((i) => i[0]);
-      most10Years = sorted10Years.slice(0, 6).map((i) => i[0]);
-      least10Years = sorted10Years.slice(38).map((i) => i[0]);
-      mostAll = sortedAll.slice(0, 6).map((i) => i[0]);
-      leastAll = sortedAll.slice(38).map((i) => i[0]);
-    }
-  };
-  getNum();
+  const [most1Month, setMost1Month] = useState([]);
+  const [most3Months, setMost3Months] = useState([]);
+  const [most1Year, setMost1Year] = useState([]);
+  const [most3Years, setMost3Years] = useState([]);
+  const [most10Years, setMost10Years] = useState([]);
+  const [mostAll, setMostAll] = useState([]);
+  const [least1Month, setLeast1Month] = useState([]);
+  const [least3Months, setLeast3Months] = useState([]);
+  const [least1Year, setLeast1Year] = useState([]);
+  const [least3Years, setLeast3Years] = useState([]);
+  const [least10Years, setLeast10Years] = useState([]);
+  const [leastAll, setLeastAll] = useState([]);
+  useEffect(() => {
+    const getNum = async () => {
+      let latestNums = await axios.get(
+        "http://localhost:5000/number-counts-stats"
+      );
+      console.log(latestNums);
+
+      const data = latestNums.data;
+      if (data) {
+        const {
+          sorted1Month,
+          sorted1Year,
+          sorted3Months,
+          sorted3Years,
+          sorted10Years,
+          sortedAll,
+        } = data;
+
+        
+        setMost1Month(sorted1Month.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setLeast1Month(sorted1Month.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
+
+        setMost3Months(sorted3Months.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setLeast3Months(
+          sorted3Months.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b)
+        );
+        setMost1Year(sorted1Year.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setLeast1Year(sorted1Year.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
+        setMost3Years(sorted3Years.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setLeast3Years(sorted3Years.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
+        setMost10Years(sorted10Years.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setLeast10Years(
+          sorted10Years.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b)
+        );
+        setMostAll(sortedAll.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+
+        setLeastAll(sortedAll.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
+      }
+    };
+    getNum();
+  }, []);
 
   return (
     <LatestNumbersBox>
-      <LottoBoxSimple lottoNumber={most1Month} />
-
-      <LottoBoxSimple lottoNumber={least1Month} />
-      <LottoBoxSimple lottoNumber={most3Months} />
-      <LottoBoxSimple lottoNumber={least3Months} />
-      <LottoBoxSimple lottoNumber={most1Year} />
-      <LottoBoxSimple lottoNumber={least1Year} />
-      <LottoBoxSimple lottoNumber={most3Years} />
-      <LottoBoxSimple lottoNumber={least3Years} />
-      <LottoBoxSimple lottoNumber={most10Years} />
-      <LottoBoxSimple lottoNumber={least10Years} />
-      <LottoBoxSimple lottoNumber={mostAll} />
-      <LottoBoxSimple lottoNumber={leastAll} />
+      <h2>Number Statistics </h2>
+      <HorizontalContainer>
+        <LottoBoxSimpleSm lottoNumber={most1Month} />
+        <LottoBoxSimpleSm lottoNumber={least1Month} />
+      </HorizontalContainer>
+      <HorizontalContainer>
+        <LottoBoxSimpleSm lottoNumber={most3Months} />
+        <LottoBoxSimpleSm lottoNumber={least3Months} />
+      </HorizontalContainer>
+      <HorizontalContainer>
+        <LottoBoxSimpleSm lottoNumber={most1Year} />
+        <LottoBoxSimpleSm lottoNumber={least1Year} />
+      </HorizontalContainer>
+      <HorizontalContainer>
+        <LottoBoxSimpleSm lottoNumber={most3Years} />
+        <LottoBoxSimpleSm lottoNumber={least3Years} />
+      </HorizontalContainer>
+      <HorizontalContainer>
+        <LottoBoxSimpleSm lottoNumber={most10Years} />
+        <LottoBoxSimpleSm lottoNumber={least10Years} />
+      </HorizontalContainer>
+      <HorizontalContainer>
+        <LottoBoxSimpleSm lottoNumber={mostAll} />
+        <LottoBoxSimpleSm lottoNumber={leastAll} />
+      </HorizontalContainer>
     </LatestNumbersBox>
   );
 };

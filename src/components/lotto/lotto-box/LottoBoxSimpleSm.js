@@ -1,9 +1,8 @@
 import React from "react";
-import { LottoBox, LottoBoxNumber } from "./LottoBoxComponentStyles.jsx";
+import { LottoBox, LottoBoxNumberSm } from "./LottoBoxComponentStyles.jsx";
 
-const LottoBoxSimple = ({ lottoNumber }) => {
+const LottoBoxSimpleSm = ({ lottoNumber }) => {
   let numbers;
-
   if (lottoNumber) {
     numbers = lottoNumber.slice(0, 6);
   }
@@ -13,7 +12,7 @@ const LottoBoxSimple = ({ lottoNumber }) => {
       {lottoNumber && lottoNumber.length > 0 ? (
         <LottoBox>
           {numbers.map((n, i) => (
-            <LottoBoxNumber key={i}>{n}</LottoBoxNumber>
+            <LottoBoxNumberSm key={i}>{n}</LottoBoxNumberSm>
           ))}
         </LottoBox>
       ) : (
@@ -23,4 +22,4 @@ const LottoBoxSimple = ({ lottoNumber }) => {
   );
 };
 
-export default LottoBoxSimple;
+export default LottoBoxSimpleSm;
