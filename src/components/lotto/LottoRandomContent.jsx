@@ -20,6 +20,7 @@ const LottoRandomContentBox = styled.div`
     margin-top: 1rem;
   }
 `;
+
 const RandomButton = styled.button`
   max-width: 100px;
   margin-left: 1rem;
@@ -42,16 +43,17 @@ const LottoRandomContent = () => {
       }
     }
     lottoNumber.sort((a, b) => a - b);
+    
     setLottoNumbers([...lottoNumbers, lottoNumber]);
   }, [lottoNumbers]);
 
   return (
     <LottoRandomContentBox>
       <h2>Generate Random Numbers!</h2>
+      <RandomButton onClick={handleButtonClick}>Generate!</RandomButton>
       {lottoNumbers.map((lottoNumber, i) => (
         <LottoBoxSimple key={i} lottoNumber={lottoNumber} />
       ))}
-      <RandomButton onClick={handleButtonClick}>Generate!</RandomButton>
     </LottoRandomContentBox>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as axios from "axios";
 
-
 import LottoBoxSimpleSm from "./lotto-box/LottoBoxSimpleSm";
 import styled from "styled-components";
 
@@ -9,7 +8,7 @@ const LatestNumbersBox = styled.div`
   margin-top: 50px;
   text-align: center;
   width: 90%;
-  height: 500px;
+  height: 900px;
   border-radius: 10px;
   background-color: white;
   display: flex;
@@ -25,8 +24,20 @@ const LatestNumbersBox = styled.div`
 
 const HorizontalContainer = styled.div`
   display: flex;
-
   flex-direction: row;
+  justify-content: center;
+`;
+
+const VerticalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  font-size: 1rem;
+  text-align: start;
+
+  & + & {
+    margin-left: 3rem;
+  }
 `;
 
 const LottoStatistics = () => {
@@ -45,7 +56,7 @@ const LottoStatistics = () => {
   useEffect(() => {
     const getNum = async () => {
       let latestNums = await axios.get(
-        "https://lott-of-fun.herokuapp.com/number-counts-stats"
+        "http://localhost:5000/number-counts-stats"
       );
       console.log(latestNums);
 
@@ -60,25 +71,80 @@ const LottoStatistics = () => {
           sortedAll,
         } = data;
 
-        
-        setMost1Month(sorted1Month.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
-        setLeast1Month(sorted1Month.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
+        setMost1Month(
+          sorted1Month
+            .filter((v, i) => i < 6)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
+        setLeast1Month(
+          sorted1Month
+            .filter((v, i) => i >= 38)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
 
-        setMost3Months(sorted3Months.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setMost3Months(
+          sorted3Months
+            .filter((v, i) => i < 6)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
         setLeast3Months(
-          sorted3Months.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b)
+          sorted3Months
+            .filter((v, i) => i >= 38)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
         );
-        setMost1Year(sorted1Year.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
-        setLeast1Year(sorted1Year.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
-        setMost3Years(sorted3Years.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
-        setLeast3Years(sorted3Years.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
-        setMost10Years(sorted10Years.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setMost1Year(
+          sorted1Year
+            .filter((v, i) => i < 6)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
+        setLeast1Year(
+          sorted1Year
+            .filter((v, i) => i >= 38)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
+        setMost3Years(
+          sorted3Years
+            .filter((v, i) => i < 6)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
+        setLeast3Years(
+          sorted3Years
+            .filter((v, i) => i >= 38)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
+        setMost10Years(
+          sorted10Years
+            .filter((v, i) => i < 6)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
         setLeast10Years(
-          sorted10Years.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b)
+          sorted10Years
+            .filter((v, i) => i >= 38)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
         );
-        setMostAll(sortedAll.filter((v, i) => i < 6).map((i) => i[0]).sort((a, b) => a - b));
+        setMostAll(
+          sortedAll
+            .filter((v, i) => i < 6)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
 
-        setLeastAll(sortedAll.filter((v, i) => i >= 38).map((i) => i[0]).sort((a, b) => a - b));
+        setLeastAll(
+          sortedAll
+            .filter((v, i) => i >= 38)
+            .map((i) => i[0])
+            .sort((a, b) => a - b)
+        );
       }
     };
     getNum();
@@ -87,29 +153,46 @@ const LottoStatistics = () => {
   return (
     <LatestNumbersBox>
       <h2>Number Statistics </h2>
+
       <HorizontalContainer>
-        <LottoBoxSimpleSm lottoNumber={most1Month} />
-        <LottoBoxSimpleSm lottoNumber={least1Month} />
-      </HorizontalContainer>
-      <HorizontalContainer>
-        <LottoBoxSimpleSm lottoNumber={most3Months} />
-        <LottoBoxSimpleSm lottoNumber={least3Months} />
-      </HorizontalContainer>
-      <HorizontalContainer>
-        <LottoBoxSimpleSm lottoNumber={most1Year} />
-        <LottoBoxSimpleSm lottoNumber={least1Year} />
-      </HorizontalContainer>
-      <HorizontalContainer>
-        <LottoBoxSimpleSm lottoNumber={most3Years} />
-        <LottoBoxSimpleSm lottoNumber={least3Years} />
-      </HorizontalContainer>
-      <HorizontalContainer>
-        <LottoBoxSimpleSm lottoNumber={most10Years} />
-        <LottoBoxSimpleSm lottoNumber={least10Years} />
-      </HorizontalContainer>
-      <HorizontalContainer>
-        <LottoBoxSimpleSm lottoNumber={mostAll} />
-        <LottoBoxSimpleSm lottoNumber={leastAll} />
+        <VerticalContainer>
+          <h3>Top 6 #s over the last</h3>
+          <h3>1 Month </h3>
+          <LottoBoxSimpleSm lottoNumber={most1Month} />
+          <h3>3 Months </h3>
+          <LottoBoxSimpleSm lottoNumber={most3Months} />
+
+          <h3>1 Year </h3>
+          <LottoBoxSimpleSm lottoNumber={most1Year} />
+          <h3>3 Years </h3>
+          <LottoBoxSimpleSm lottoNumber={most3Years} />
+          <h3>10 Years</h3>
+          <LottoBoxSimpleSm lottoNumber={most10Years} />
+
+          <h3>All Time </h3>
+          <LottoBoxSimpleSm lottoNumber={mostAll} />
+        </VerticalContainer>
+
+        <VerticalContainer>
+          <h3>Bottom 6 #s over the last </h3>
+          <h3>1 Month </h3>
+          <LottoBoxSimpleSm lottoNumber={least1Month} />
+
+          <h3>3 Months </h3>
+          <LottoBoxSimpleSm lottoNumber={least3Months} />
+
+          <h3>1 Year </h3>
+          <LottoBoxSimpleSm lottoNumber={least1Year} />
+
+          <h3>3 Years</h3>
+          <LottoBoxSimpleSm lottoNumber={least3Years} />
+
+          <h3>10 Years</h3>
+          <LottoBoxSimpleSm lottoNumber={least10Years} />
+
+          <h3>All Time </h3>
+          <LottoBoxSimpleSm lottoNumber={leastAll} />
+        </VerticalContainer>
       </HorizontalContainer>
     </LatestNumbersBox>
   );
