@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lotto-project-front/static/css/main.a6b0420d.chunk.css",
-    "main.js": "/lotto-project-front/static/js/main.cddf1a30.chunk.js",
-    "main.js.map": "/lotto-project-front/static/js/main.cddf1a30.chunk.js.map",
+    "main.js": "/lotto-project-front/static/js/main.4470bf8f.chunk.js",
+    "main.js.map": "/lotto-project-front/static/js/main.4470bf8f.chunk.js.map",
     "runtime-main.js": "/lotto-project-front/static/js/runtime-main.95348262.js",
     "runtime-main.js.map": "/lotto-project-front/static/js/runtime-main.95348262.js.map",
     "static/js/2.96d31aef.chunk.js": "/lotto-project-front/static/js/2.96d31aef.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.95348262.js",
     "static/js/2.96d31aef.chunk.js",
     "static/css/main.a6b0420d.chunk.css",
-    "static/js/main.cddf1a30.chunk.js"
+    "static/js/main.4470bf8f.chunk.js"
   ]
 }
