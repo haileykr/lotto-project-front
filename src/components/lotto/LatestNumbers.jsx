@@ -37,12 +37,12 @@ const LottoRandomHeader = () => {
     setLatestWeek(week);
 
     const getNum = async () => {
-      let latestNums = await axios.get("http://localhost:5000/latest");
+      let latestNums = await axios.get("https://lott-of-fun.herokuapp.com/latest");
 
       if (latestNums.round !== week) {
-        await axios.get("http://localhost:5000/lottos/update");
+        await axios.get("https://lott-of-fun.herokuapp.com/lottos/update");
 
-        latestNums = await axios.get("http://localhost:5000/latest");
+        latestNums = await axios.get("https://lott-of-fun.herokuapp.com/latest");
       }
 
       const data = latestNums.data;

@@ -55,7 +55,7 @@ const LottoChart = () => {
       to: toDate,
     };
     const records = await axios.post(
-      "http://localhost:5000/number-counts",
+      "https://lott-of-fun.herokuapp.com/number-counts",
       range
     );
     const sorted = records.data.sort((a, b) => b[1] - a[1]);

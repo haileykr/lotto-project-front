@@ -56,7 +56,7 @@ const LottoStatistics = () => {
   useEffect(() => {
     const getNum = async () => {
       let latestNums = await axios.get(
-        "http://localhost:5000/number-counts-stats"
+        "https://lott-of-fun.herokuapp.com/number-counts-stats"
       );
       console.log(latestNums);
 
